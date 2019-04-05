@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/test_db?charSet=UTF8
+    username: postgres
+    password:
+    initialization-mode: always
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-test-query: SELECT 1;
+      connection-timeout: 30000
+      idle-timeout: 30000
+      max-lifetime: 2000000
+      maximum-pool-size: 50
+      minimum-idle: 20
+      pool-name: SpringBootHikariCP
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
