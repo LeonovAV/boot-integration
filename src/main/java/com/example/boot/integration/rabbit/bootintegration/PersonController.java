@@ -17,4 +17,10 @@ public class PersonController {
         personService.create();
     }
 
+    @PostMapping
+    @RequestMapping("/batch")
+    public void createBatch() {
+        personService.batchCreate();
+    }
+
 }
