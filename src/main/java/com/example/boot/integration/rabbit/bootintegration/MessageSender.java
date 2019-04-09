@@ -21,10 +21,13 @@ public class MessageSender {
     private FanoutExchange fanoutExchange;
 
     @Autowired
+    private FanoutExchange fanoutBatchExchange;
+
+    @Autowired
     private DirectExchange directExchange;
 
-//    @Autowired
-//    private BatchingRabbitTemplate batchingRabbitTemplate;
+    @Autowired
+    private BatchingRabbitTemplate batchingRabbitTemplate;
 
     public void send(String payload) {
         rabbitTemplate.convertAndSend(fanoutExchange.getName(), "", payload);
@@ -32,11 +35,11 @@ public class MessageSender {
 
     public void sendAll(List<String> payload) {
         MessageProperties messageProperties = new MessageProperties();
-        messageProperties.setContentType(MessageProperties.CONTENT_TYPE_BYTES);
+        messageProperties.setContentType(MessageProperties.CONTENT_TYPE_TEXT_PLAIN);
 
-//        payload.forEach(p -> {
-//            batchingRabbitTemplate.send(fanoutExchange.getName(), "", new Message(p.getBytes(), messageProperties));
-//        });
+        payload.forEach(p -> {
+            batchingRabbitTemplate.send(fanoutBatchExchange.getName(), "", new Message(p.getBytes(), messageProperties));
+        });
     }
 
     public String createTask(String personId) {

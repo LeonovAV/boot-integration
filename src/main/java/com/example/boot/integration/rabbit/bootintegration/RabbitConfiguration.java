@@ -102,25 +102,25 @@ public class RabbitConfiguration {
         return rabbitTemplate;
     }
 
-//    @Bean
-//    public BatchingRabbitTemplate batchingRabbitTemplate() {
-//        BatchingStrategy strategy = new SimpleBatchingStrategy(10, 100, 10000);
-//        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-//        scheduler.initialize();
-//
-//        BatchingRabbitTemplate rabbitTemplate = new BatchingRabbitTemplate(strategy, scheduler);
-//        rabbitTemplate.setConnectionFactory(connectionFactory());
-//        rabbitTemplate.setChannelTransacted(true);
-//        return rabbitTemplate;
-//    }
-//
-//    @Bean
-//    public SimpleRabbitListenerContainerFactory myContainerFactory(ConnectionFactory connectionFactory) {
-//        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-//        factory.setConnectionFactory(connectionFactory);
-//        factory.setMissingQueuesFatal(false);
-//        return factory;
-//    }
+    @Bean
+    public BatchingRabbitTemplate batchingRabbitTemplate() {
+        BatchingStrategy strategy = new SimpleBatchingStrategy(10, 100, 10000);
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.initialize();
+
+        BatchingRabbitTemplate rabbitTemplate = new BatchingRabbitTemplate(strategy, scheduler);
+        rabbitTemplate.setConnectionFactory(connectionFactory());
+        rabbitTemplate.setChannelTransacted(true);
+        return rabbitTemplate;
+    }
+
+    @Bean
+    public SimpleRabbitListenerContainerFactory myContainerFactory(ConnectionFactory connectionFactory) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setMissingQueuesFatal(false);
+        return factory;
+    }
 
     // From spring integration
 //    @Bean

@@ -39,7 +39,7 @@ public class PersonService {
 
     @Transactional
     public void batchCreate() {
-        List<String> payload = Arrays.asList("a", "b", "c", "d", "e", "f", "a", "b", "c", "d", "e", "f", "a", "b", "c", "d", "e", "f");
+        List<String> payload = Arrays.asList("a", "b", "c", "d", "e", "f", "a", "b", "c", "d", "e", "f", "a");
         messageSender.sendAll(payload);
     }
 
